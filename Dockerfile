@@ -2,7 +2,9 @@ FROM python:3.12-slim-bookworm
 
 WORKDIR /app
 
-COPY --from=node:22-bookworm-slim /usr/local/bin/node /usr/local/bin/node
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
