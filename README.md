@@ -38,3 +38,32 @@ You can get the details of a specific movie from the API with the `i` query para
     curl -XGET 'http://www.omdbapi.com/?apikey=[API-key]&i=[imdbID]'
 
 The pre-saved data is in data/details.json.
+
+## Development
+
+The app is a FastAPI backend with a React frontend built by Vite. Pages are server-rendered: FastAPI calls Node to render the React app on each request.
+
+Open [http://localhost:8000](http://localhost:8000) once the server is running.
+
+### Prerequisites
+
+- **Docker:** Docker and Docker Compose
+- **Local:** Python 3.12+, Node.js 22+, and npm
+
+### Docker
+
+From the project root:
+
+1. Install frontend dependencies and start the build watcher:
+
+       cd public
+       npm install
+       npm run build:watch
+
+2. In another terminal, start the app:
+
+       docker compose up --build
+
+   `--build` rebuilds the image when needed and starts the container in one step — you do not need a separate `docker compose up` after it. On later runs, plain `docker compose up` is enough unless you changed the Dockerfile or backend dependencies.
+
+The backend reloads automatically when you edit files in `backend/`. The frontend watcher rebuilds `public/dist/`; refresh the browser after frontend changes.

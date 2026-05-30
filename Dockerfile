@@ -8,6 +8,8 @@ COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
 COPY backend/ backend/
+COPY public/package.json public/package.json
+COPY public/ssr-bridge.mjs public/ssr-bridge.mjs
 
 EXPOSE 8000
 

@@ -6,5 +6,5 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./frontend/dist:/app/frontend/dist
+      - ./public/dist:/app/public/dist
       - ./backend:/app/backend
