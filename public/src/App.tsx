@@ -8,12 +8,15 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [movies, setMovies] = useState<MovieSummary[]>([]);
   const [details, setDetails] = useState<MovieDetails | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const searchMovies = async () => {
-    const response = await fetch(`http://localhost:8000/api/imdb/search?q=${search}`);
+    const response = await fetch(`/api/imdb/search?q=${encodeURIComponent(search)}`);
 
     if (!response.ok) {
-      throw new Error("Failed to search movies");
+      setMovies([]);
+      setError("No movies found, try again.");
+      return;
     }
 
     const data = await response.json();
@@ -21,7 +24,7 @@ export default function App() {
   };
 
   const getMovieDetails = async (imdbID: string) => {
-    const response = await fetch(`http://localhost:8000/api/imdb/movies/${imdbID}`);
+    const response = await fetch(`/api/imdb/movies/${imdbID}`);
 
     if (!response.ok) {
       throw new Error("Failed to get movie details");
@@ -45,6 +48,7 @@ export default function App() {
             onSearchChange={setSearch}
             onSearch={searchMovies}
             onSelectMovie={getMovieDetails}
+            error={error}
           />
         )}
       </div>

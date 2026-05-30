@@ -6,6 +6,7 @@ interface SearchPageProps {
   onSearchChange: (value: string) => void;
   onSearch: () => void;
   onSelectMovie: (imdbID: string) => void;
+  error: string | null;
 }
 
 export default function SearchPage({
@@ -14,6 +15,7 @@ export default function SearchPage({
   onSearchChange,
   onSearch,
   onSelectMovie,
+  error,
 }: SearchPageProps) {
   return (
     <div>
@@ -33,7 +35,7 @@ export default function SearchPage({
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {movies.map((movie) => (
+        {movies.length > 0 ? movies.map((movie) => (
           <div
             key={movie.imdbID}
             className="cursor-pointer"
@@ -43,7 +45,7 @@ export default function SearchPage({
             <h3>{movie.Title}</h3>
             <p>{movie.Year}</p>
           </div>
-        ))}
+        )): error ? <p className="text-red-500">{error}</p> : <p>Start typing to search for movies.</p>}
       </div>
     </div>
   );
