@@ -11,12 +11,22 @@ export default function App() {
 
   const searchMovies = async () => {
     const response = await fetch(`http://localhost:8000/api/imdb/search?q=${search}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to search movies");
+    }
+
     const data = await response.json();
     setMovies(data.Search);
   };
 
   const getMovieDetails = async (imdbID: string) => {
     const response = await fetch(`http://localhost:8000/api/imdb/movies/${imdbID}`);
+
+    if (!response.ok) {
+      throw new Error("Failed to get movie details");
+    }
+
     const data = await response.json();
     setDetails(data);
   };
