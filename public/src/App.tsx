@@ -12,14 +12,12 @@ export default function App() {
   const searchMovies = async () => {
     const response = await fetch(`http://localhost:8000/api/imdb/search?q=${search}`);
     const data = await response.json();
-    console.log("searchMovies response:", data);
     setMovies(data.Search);
   };
 
   const getMovieDetails = async (imdbID: string) => {
     const response = await fetch(`http://localhost:8000/api/imdb/movies/${imdbID}`);
     const data = await response.json();
-    console.log("getMovieDetails response:", data);
     setDetails(data);
   };
 
@@ -27,7 +25,7 @@ export default function App() {
     <main className="min-h-screen bg-slate-900 px-6 py-12 text-slate-100">
       <div className="mx-auto max-w-4xl">
         <h1 className="text-3xl font-semibold tracking-tight mb-4">Kundo Movies</h1>
-        
+
         {details ? (
           <MovieDetailsPage details={details} onBack={() => setDetails(null)} />
         ) : (

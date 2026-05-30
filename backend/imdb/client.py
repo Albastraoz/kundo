@@ -21,8 +21,6 @@ async def search_movies(query: str) -> dict:
                 params={"apikey": api_key, "s": query},
             )
             response.raise_for_status()
-
-            print('search_movies response:', response.json())
             return response.json()
 
     data = _load_fixture("search.json")
@@ -51,7 +49,6 @@ async def get_movie(imdb_id: str) -> dict:
                 params={"apikey": api_key, "i": imdb_id},
             )
             response.raise_for_status()
-            print('get_movie response:', response.json())
             return response.json()
 
     data = _load_fixture("details.json")
