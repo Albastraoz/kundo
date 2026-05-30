@@ -9,6 +9,7 @@ RUN apt-get update \
 COPY backend/requirements.txt backend/requirements.txt
 RUN pip install --no-cache-dir -r backend/requirements.txt
 
+COPY pytest.ini pytest.ini
 COPY backend/ backend/
 COPY public/package.json public/package.json
 COPY public/ssr-bridge.mjs public/ssr-bridge.mjs

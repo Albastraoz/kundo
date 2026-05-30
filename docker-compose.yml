@@ -8,5 +8,8 @@ services:
     volumes:
       - ./public/dist:/app/public/dist
       - ./backend:/app/backend
+      - ./data:/app/data
+    environment:
+      PYTHONPATH: /app
     env_file:
       - .env

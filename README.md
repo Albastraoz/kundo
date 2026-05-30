@@ -67,3 +67,11 @@ From the project root:
    `--build` rebuilds the image when needed and starts the container in one step — you do not need a separate `docker compose up` after it. On later runs, plain `docker compose up` is enough unless you changed the Dockerfile or backend dependencies.
 
 The backend reloads automatically when you edit files in `backend/`. The frontend watcher rebuilds `public/dist/`; refresh the browser after frontend changes.
+
+### Tests
+
+Tests use the fixture data in `data/` (no live OMDb calls). With the app container running:
+
+    docker compose exec app pytest
+
+
